@@ -1,11 +1,11 @@
 {
-  "type": "mysql",
-  "host": "localhost",
-  "port": 3306,
-  "username": "test",
-  "password": "test",
-  "database": "test",
-  "synchronize": true,
+  "type": "mssql",
+  "host": "KBSG",
+  "port": 1433,
+  "username": "sa",
+  "password": "adm12345",
+  "database": "AldebaranFood",
+  "synchronize": false,
   "entities": [
     "src/entity/*.js"
   ],
