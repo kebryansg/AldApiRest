@@ -1,7 +1,7 @@
 {
-  "name": "typeorm-typescript-express-example",
+  "name": "aldebaran-express",
   "version": "0.0.1",
-  "description": "Example how to use Express and TypeORM with TypeScript.",
+  "description": "Aldebaran Api Rest.",
   "license": "MIT",
   "readmeFilename": "README.md",
   "author": {
@@ -10,10 +10,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/typeorm/typescript-express-example.git"
+    "url": "https://github.com/kebryansg/AldApiRest"
   },
   "bugs": {
-    "url": "https://github.com/typeorm/typescript-express-example/issues"
+    "url": "https://github.com/kebryansg/AldApiRest/issues"
   },
   "tags": [
     "orm",
