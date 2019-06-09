@@ -6,6 +6,8 @@
   "password": "adm12345",
   "database": "AldebaranFood",
   "synchronize": false,
+  "logging": true,
+  "logger": "file",
   "entities": [
     "src/entity/*.ts"
   ],

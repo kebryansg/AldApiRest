@@ -5,48 +5,47 @@ import {
     Post,
     Put,
     Delete,
-    JsonController,
     Controller,
     QueryParams
 } from "routing-controllers";
-import {getManager, getRepository} from "typeorm";
+import {getRepository} from "typeorm";
 import {Producto} from "../entity/Producto";
 
-@JsonController()
+@Controller("/producto")
 export class ProductoController {
 
-    @Get("/producto")
+    @Get("")
     async getAll(@QueryParams() params: any) {
-        let [items, count] = await getRepository(Producto).findAndCount({
-            select: [
-              "IDPD", "Codigo", "CodigoExterno", "Nombre"
-            ],
-            skip: params.offset | 0,
-            take: params.limite | 5
-        });
 
+        let query = getRepository(Producto)
+            .createQueryBuilder()
+            .select(["IDPD", "Codigo", "CodigoExterno", "Nombre"])
+            .where("NOT(IDPD IN (:...exclude))", { exclude: params.exclude.split(',') || [] })
+            .andWhere(`(Nombre LIKE :search OR Codigo LIKE :search)`, { search: `%${params.search}%` })
+            .skip(params.offset | 0)
+            .take(params.limite | 5);
         return {
-            items: items,
-            count: count
+            items: await query.getRawMany(),
+            count: await query.getCount()
         };
     }
 
-    @Get("/producto/:id")
+    @Get("/:id")
     getOne(@Param("id") id: number) {
-        return getManager().findOne(Producto, id);
+        return getRepository(Producto).findOne(id);
     }
 
-    @Post("/users")
-    post(@Body() user: any) {
+    @Post("")
+    post(@Body() body: any) {
         return "Saving user...";
     }
 
-    @Put("/users/:id")
-    put(@Param("id") id: number, @Body() user: any) {
+    @Put("/:id")
+    put(@Param("id") id: number, @Body() body: any) {
         return "Updating a user...";
     }
 
-    @Delete("/users/:id")
+    @Delete("/:id")
     remove(@Param("id") id: number) {
         return "Removing user...";
     }

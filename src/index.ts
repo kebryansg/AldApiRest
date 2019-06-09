@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import {createExpressServer} from "routing-controllers";
-import {ProductoController} from "./controller/ProductoController";
+import {ClienteController, ProductoController} from "./controller/index.controller";
 import {createConnection} from "typeorm";
 
 let {settings} = require('../assets/init.js');
@@ -14,12 +14,15 @@ createConnection().then(async connection => {
     const app = createExpressServer({
         defaultErrorHandler: false,
         cors: true,
-        controllers: [ProductoController] // we specify controllers we want to use
+        controllers: [
+            ProductoController,
+            ClienteController
+        ] // we specify controllers we want to use
     });
 
     // run express application on port 3000
     app.listen(settings.port, () => {
-        console.log(`server started at http://localhost:${ settings.port }`);
+        console.log(`server started at http://localhost:${settings.port}`);
     });
 
 }).catch(error => console.log("TypeORM connection error: ", error));
