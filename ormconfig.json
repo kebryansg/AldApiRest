@@ -7,7 +7,7 @@
   "database": "AldebaranFood",
   "synchronize": false,
   "entities": [
-    "src/entity/*.js"
+    "src/entity/*.ts"
   ],
   "subscribers": [
     "src/subscriber/*.js"

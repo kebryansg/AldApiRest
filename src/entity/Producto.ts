@@ -1,18 +1,3 @@
-import {
-    BaseEntity,
-    Column,
-    Entity,
-    Index,
-    JoinColumn,
-    JoinTable,
-    ManyToMany,
-    ManyToOne,
-    OneToMany,
-    OneToOne,
-    PrimaryColumn,
-    PrimaryGeneratedColumn,
-    RelationId
-} from "typeorm";
 // import {Fabricante} from "./Fabricante";
 // import {Categoria} from "./Categoria";
 // import {Grupo} from "./Grupo";
@@ -37,6 +22,7 @@ import {
 // import {ProformaVtaDet} from "./ProformaVtaDet";
 // import {THDetalle} from "./THDetalle";
 
+import {Column, Entity} from "typeorm";
 
 @Entity("Producto", {schema: "dbo"})
 export class Producto {

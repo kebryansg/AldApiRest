@@ -1,18 +1,39 @@
-import {Controller, Param, Body, Get, Post, Put, Delete, JsonController} from "routing-controllers";
-import {getConnection} from "typeorm";
+import {
+    Param,
+    Body,
+    Get,
+    Post,
+    Put,
+    Delete,
+    JsonController,
+    Controller,
+    QueryParams
+} from "routing-controllers";
+import {getManager, getRepository} from "typeorm";
 import {Producto} from "../entity/Producto";
 
 @JsonController()
 export class ProductoController {
 
     @Get("/producto")
-    getAll() {
-        return getConnection().manager.find(Producto);
+    async getAll(@QueryParams() params: any) {
+        let [items, count] = await getRepository(Producto).findAndCount({
+            select: [
+              "IDPD", "Codigo", "CodigoExterno", "Nombre"
+            ],
+            skip: params.offset | 0,
+            take: params.limite | 5
+        });
+
+        return {
+            items: items,
+            count: count
+        };
     }
 
     @Get("/producto/:id")
     getOne(@Param("id") id: number) {
-        return getConnection().manager.findOne(Producto, id);
+        return getManager().findOne(Producto, id);
     }
 
     @Post("/users")

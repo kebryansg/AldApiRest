@@ -1,7 +1,7 @@
 import "reflect-metadata";
-import {createConnection} from "typeorm";
 import {createExpressServer} from "routing-controllers";
 import {ProductoController} from "./controller/ProductoController";
+import {createConnection} from "typeorm";
 
 let {settings} = require('../assets/init.js');
 
@@ -12,6 +12,8 @@ createConnection().then(async connection => {
 
     // creates express app, registers all controller routes and returns you express app instance
     const app = createExpressServer({
+        defaultErrorHandler: false,
+        cors: true,
         controllers: [ProductoController] // we specify controllers we want to use
     });
 
